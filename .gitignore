@@ -1,0 +1,9 @@
+.DS_Store
+Thumbs.db
+
+.env.local
+
+*.log
+
+node_modules/
+build/

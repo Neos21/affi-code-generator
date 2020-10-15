@@ -1,0 +1,44 @@
+{
+  "name": "affi-code-generator",
+  "description": "Amazon And Rakuten Affiliate HTML Code Generator",
+  "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "serve": "npx serve -s ./build/"
+  },
+  "author": "Neo <neos21@gmail.com> (http://neo.s21.xrea.com/)",
+  "license": "MIT",
+  "homepage": "./",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Neos21/affi-code-generator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Neos21/affi-code-generator/issues"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/Neos21"
+  },
+  "dependencies": {
+    "react": "16.14.0",
+    "react-dom": "16.14.0",
+    "react-scripts": "3.4.3"
+  },
+  "browserslist": {
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ],
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  }
+}

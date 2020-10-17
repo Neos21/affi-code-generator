@@ -88,7 +88,7 @@ module.exports = async (req, res) => {
       imageUrl        : getValue(item, 'Images.Primary.Medium.URL')      || '',
       imageWidth      : getValue(item, 'Images.Primary.Medium.Width')    || '',
       imageHeight     : getValue(item, 'Images.Primary.Medium.Height')   || '',
-      price           : getValue(item, 'Offers.Listings.0.Price.Amount') || ''
+      price           : getValue(item, 'Offers.Listings.0.Price.Amount') || '-'
     }));
     console.log('apa-search : Success', results);
     return res.status(200).json(results);

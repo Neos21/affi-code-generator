@@ -55,6 +55,10 @@ body {
   height: 100%;
 }
 
+a {
+  color: #06f;
+}
+
 input {
   border: 1px solid var(--border-colour);
   border-radius: 4px;

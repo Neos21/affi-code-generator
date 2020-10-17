@@ -35,6 +35,15 @@
   font-size: 1rem;
 }
 
+#search-form h1 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+#search-form h1 a:hover {
+  text-decoration: underline;
+}
+
 #search-form input {
   margin: 0 auto .25rem;
   display: block;
@@ -46,4 +55,8 @@
 
 #search-form input[type="button"] {
   margin: .5rem auto 0;
+}
+
+#search-form .copyright {
+  margin: 1rem 0 0;
 }

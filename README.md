@@ -1,10 +1,22 @@
 # Affi Code Generator
 
-Amazon And Rakuten Affiliate HTML Code Generator
+Amazon And Rakuten Affiliate HTML Code Generator.
 
-- Setup `.env.local` (Reference : `.env.example`)
-- Develop : `$ npm start`
-- Build : `$ npm run build` Then `$ npm run serve`
+__[Enter The Web App](https://affi-code-generator.vercel.app/)__
+
+- Develop : `$ vercel dev`
+- Ship : `$ vercel`
+- Initial Value :
+
+```
+https://affi-code-generator.vercel.app/
+  ?keyword=【Keyword】
+  &amazonAccessKey=【Amazon Access Key】
+  &amazonSecretKey=【Amazon Secret Key : Convert '+' To '%2B'】
+  &amazonPartnerTag=【Amazon Partner Tag (Associate ID or Tracking ID)】
+  &rakutenApplicationId=【Rakuten Application ID】
+  &rakutenAffiliateId=【Rakuten Affiliate ID】
+```
 
 
 ## Author

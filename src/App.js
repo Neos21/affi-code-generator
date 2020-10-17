@@ -1,102 +1,123 @@
 import React from 'react';
 
+import SearchForm from './SearchForm';
+import AmazonResults from './AmazonResults';
+import AmazonCode from './AmazonCode';
+import RakutenResults from './RakutenResults';
+import RakutenCode from './RakutenCode';
+
 import getValue from './lib/get-value';
+import searchAmazon from './lib/search-amazon';
+import searchRakuten from './lib/search-rakuten';
 
 import './App.css';
 
-class Item extends React.Component {
-  render() {
-    return (
-      <li className="item">
-        <div className="item-image"><img src={this.props.item.imageUrl} /></div>
-        <div className="item-name"><a href={this.props.item.itemUrl}><strong>{this.props.item.itemName}</strong></a></div>
-        <div className="item-shop"><a href={this.props.item.shopUrl}>{this.props.item.shopName}</a></div>
-        <div className="item-price">価格 : {this.props.item.itemPrice}円</div>
-      </li>
-    );
-  }
-}
-
+/** アプリホーム */
 export default class App extends React.Component {
+  /**
+   * コンストラクタ
+   * 
+   * @param {*} props Props
+   */
   constructor(props) {
     super(props);
-    this.state = {
-      applicationId: process.env.REACT_APP_APPLICATION_ID,
-      affiliateId: process.env.REACT_APP_AFFILIATE_ID,
-      items: [],
-      errorMessage: ''
-    };
-    this.inputText = React.createRef();
+    this.amazonResults = React.createRef();
+    this.amazonCode    = React.createRef();
+    this.rakutenResults = React.createRef();
+    this.rakutenCode    = React.createRef();
   }
   
-  search = () => {
-    this.setState({
-      items: [],
-      errorMessage: ''
-    });
-    
-    if(!this.inputText.current.value) {
-      return this.setState({ errorMessage: '検索キーワードを入力してください' });
+  /**
+   * 「Amazon 検索」イベントを中継する
+   * 
+   * @param {*} state 子コンポーネントから送られてきたデータ
+   */
+  callSearchAmazon = async (state) => {
+    try {
+      this.amazonCode.current.clearCode();
+      this.amazonResults.current.onSearching();
+      
+      const amazonResults = await searchAmazon(state);
+      console.log('callSearchAmazon : Success', amazonResults);
+      this.amazonResults.current.showResults(amazonResults);
     }
-    
-    const applicationId = this.state.applicationId;
-    const affiliateId   = this.state.affiliateId;
-    const inputText     = this.inputText.current.value;
-    const keyword       = encodeURIComponent(inputText);
-    fetch(`https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706?format=json&keyword=${keyword}&applicationId=${applicationId}&affiliateId=${affiliateId}`)
-      .then(response => response.json())
-      .then(data => {
-        if(!getValue(data, 'Items')) {
-          const responseMessage = getValue(data, 'error_description') || getValue(data, 'error') || '不明なエラー';
-          console.warn('データの取得に失敗しました', responseMessage, data);
-          return this.setState({ errorMessage: `データの取得に失敗しました : [${responseMessage}]` });
+    catch(error) {
+      console.log('callSearchAmazon : Failed', error);
+      const errorMessage = (() => {
+        if(getValue(error, 'details.response.text')) {
+          return 'API エラー : ' + getValue(error, 'details.response.text');
         }
-        else if(!data.Items.length) {
-          console.warn(`キーワード「${inputText}」を含む商品は見つかりませんでした`);
-          return this.setState({ errorMessage: `キーワード「${inputText}」を含む商品は見つかりませんでした` });
-        }
-        
-        this.setState({
-          items: data.Items.map((item, index) => ({
-            id              : index,
-            itemName        : getValue(item, 'Item.itemName'),
-            itemUrl         : getValue(item, 'Item.affiliateUrl'),  // itemUrl は同じ値
-            itemPrice       : getValue(item, 'Item.itemPrice'),
-            shopName        : getValue(item, 'Item.shopName'),
-            shopUrl         : getValue(item, 'Item.shopAffiliateUrl'),  // shopUrl は同じ値
-            imageUrl        : getValue(item, 'Item.mediumImageUrls.0.imageUrl')
-          }))
-        });
-      })
-      .catch(error => {
-        console.error(error);
-        this.setState({ errorMessage: error.toString() });
-      });
+        return getValue(error, 'error') || error.toString();
+      })();
+      this.amazonResults.current.onError(errorMessage);
+    }
   }
   
-  render() {
-    return (
-      <div id="app">
-        <h1 className="title">楽天商品検索</h1>
-        <ul>
-          <li>アプリケーション ID : {this.state.applicationId}</li>
-          <li>アフィリエイト ID : {this.state.affiliateId}</li>
-        </ul>
-        <p className="search-form">
-          <input type="text" ref={this.inputText} className="input-text" />
-          <input type="button" value="検索" onClick={this.search} className="search-button" />
-        </p>
-        
-        { (this.state.items && this.state.items.length > 0) &&
-          <ul className="item-list">
-            { this.state.items.map(item => (<Item key={item.id} item={item} />)) }
-          </ul>
+  /**
+   * 「楽天市場 検索」イベントを中継する
+   * 
+   * @param {*} state 子コンポーネントから送られてきたデータ
+   */
+  callSearchRakuten = async (state) => {
+    try {
+      this.rakutenCode.current.clearCode();
+      this.rakutenResults.current.onSearching();
+      
+      const rakutenResults = await searchRakuten(state);
+      console.log('callSearchRakuten : Success', rakutenResults);
+      this.rakutenResults.current.showResults(rakutenResults);
+    }
+    catch(error) {
+      console.log('callSearchRakuten : Failed', error);
+      const errorMessage = (() => {
+        if(getValue(error, 'error')) {
+          if(getValue(error, 'error_description')) {
+            return 'Error : ' + getValue(error, 'error') + ' … ' + getValue(error, 'error_description');
+          }
+          return 'Error : ' + getValue(error, 'error');
         }
-        
-        { this.state.errorMessage &&
-          <p className="error-message">{this.state.errorMessage}</p>
-        }
-      </div>
-    );
+        return error.message || error.toString();
+      })();
+      this.rakutenResults.current.onError(errorMessage);
+    }
   }
+  
+  /**
+   * 選択した Amazon 商品の HTML コードを表示する
+   * 
+   * @param {*} state 子コンポーネントから送られてきたデータ
+   */
+  callShowAmazonCode = (state) => {
+    this.amazonCode.current.showCode(state);
+  }
+  
+  /**
+   * 選択した 楽天市場 商品の HTML コードを表示する
+   * 
+   * @param {*} state 子コンポーネントから送られてきたデータ
+   */
+  callShowRakutenCode = (state) => {
+    this.rakutenCode.current.showCode(state);
+  }
+  
+  /** Render */
+  render = () => (
+    <div id="app">
+      <div className="search-form-area">
+        <SearchForm callSearchAmazon={this.callSearchAmazon} callSearchRakuten={this.callSearchRakuten} />
+      </div>
+      <div className="results-codes-area">
+        <div className="amazon-results-area">
+          <AmazonResults ref={this.amazonResults} callShowAmazonCode={this.callShowAmazonCode} />
+        </div>
+        <div className="rakuten-results-area">
+          <RakutenResults ref={this.rakutenResults} callShowRakutenCode={this.callShowRakutenCode} />
+        </div>
+        <div className="codes-area">
+          <AmazonCode ref={this.amazonCode} />
+          <RakutenCode ref={this.rakutenCode} />
+        </div>
+      </div>
+    </div>
+  )
 }

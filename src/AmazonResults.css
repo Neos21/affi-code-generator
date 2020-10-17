@@ -1,0 +1,9 @@
+#amazon-results .results {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#amazon-results .results .amazon-result-item:last-child {
+  border-bottom: 0;
+}

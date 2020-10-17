@@ -1,92 +1,47 @@
 #app {
-  margin: 1rem;
-  max-width: 800px;
-}
-
-#app .title {
-  font-size: 1.2rem;
-}
-
-#app .search-form {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-rows: var(--search-form-area-height) calc(100% - var(--search-form-area-height));
+  height: 100%;
 }
 
-#app .input-text {
-  display: block;
-  border: 1px solid #ccc;
-  border-radius: 4px 0 0 4px;
-  padding: .4rem .5rem;
-}
-
-#app .search-button {
-  width: 4rem;
-  border: 1px solid #ccc;
-  border-left: 0;
-  border-radius: 0 4px 4px 0;
-  background: #eee;
-}
-
-#app .item-list {
-  border-top: 1px solid #ccc;
-  padding: 0;
-  list-style: none;
-}
-
-#app .item {
+#app > .results-codes-area {
   display: grid;
-  grid-template-areas: "item-image item-name"
-  "item-image item-shop"
-  "item-image item-price";
-  grid-template-columns: 128px 1fr;
-  grid-template-rows: auto auto 1fr;
-  column-gap: .5rem;
-  border-bottom: 1px solid #ccc;
-  padding: .5rem .25rem;
+  grid-template-areas: "amazon-results-area codes-area rakuten-results-area";
+  grid-template-columns: repeat(3, 1fr);
 }
 
-#app .item-image {
-  grid-area: item-image;
-  overflow: hidden;
-  height: 128px;
-  text-align: center;
+#app > .results-codes-area > .amazon-results-area {
+  grid-area: amazon-results-area;
+  overflow-y: scroll;
+  background: var(--amazon-background-colour);
 }
 
-#app .item-image img {
-  max-width: 128px;
-  max-height: 128px;
+#app > .results-codes-area > .rakuten-results-area {
+  grid-area: rakuten-results-area;
+  overflow-y: scroll;
+  background: var(--rakuten-background-colour);
 }
 
-#app .item-name,
-#app .item-shop {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+#app > .results-codes-area > .codes-area {
+  grid-area: codes-area;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  border-right: 1px solid var(--border-colour);
+  border-left: 1px solid var(--border-colour);
 }
 
-#app .item-name {
-  grid-area: item-name;
-  -webkit-line-clamp: 3;
+/* 汎用クラス */
+
+.message {
+  margin: var(--general-space);
 }
 
-#app .item-shop {
-  grid-area: item-shop;
-  -webkit-line-clamp: 2;
+.warn-message {
+  color: #990;
+  font-weight: bold;
 }
 
-#app .item a {
-  color: inherit;
-  text-decoration: none;
-}
-
-#app .item a:hover {
-  text-decoration: underline;
-}
-
-#app .item-price {
-  grid-area: item-price;
-}
-
-#app .error-message {
-  color: #c00;
+.error-message {
+  color: #f00;
+  font-weight: bold;
 }

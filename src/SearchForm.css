@@ -1,0 +1,49 @@
+#search-form {
+  display: grid;
+  grid-template-areas: "search-form-amazon search-form-general search-form-rakuten";
+  grid-template-columns: repeat(3, 1fr);
+  height: var(--search-form-area-height);
+  border-bottom: 1px solid var(--border-colour);
+}
+
+#search-form > div {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: .5rem var(--general-space);
+  text-align: center;
+}
+
+#search-form > .general {
+  grid-area: search-form-general;
+  border-right: 1px solid var(--border-colour);
+  border-left: 1px solid var(--border-colour);
+}
+
+#search-form > .amazon {
+  grid-area: search-form-amazon;
+  background: var(--amazon-background-colour);
+}
+
+#search-form > .rakuten {
+  grid-area: search-form-rakuten;
+  background: var(--rakuten-background-colour);
+}
+
+#search-form h1,
+#search-form h2 {
+  margin: 0 0 .5rem;
+  font-size: 1rem;
+}
+
+#search-form input {
+  margin: 0 auto .25rem;
+  display: block;
+}
+
+#search-form input[type="text"] {
+  width: 100%;
+}
+
+#search-form input[type="button"] {
+  margin: .5rem auto 0;
+}

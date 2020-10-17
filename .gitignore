@@ -1,9 +1,9 @@
+.env.local
 .DS_Store
 Thumbs.db
 
-.env.local
-
 *.log
 
-node_modules/
+.vercel/
 build/
+node_modules/

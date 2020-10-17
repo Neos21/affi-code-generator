@@ -1,0 +1,43 @@
+.rakuten-result-item {
+  display: grid;
+  grid-template-areas: "rakuten-result-item-image rakuten-result-item-name"
+                       "rakuten-result-item-image rakuten-result-item-shop"
+                       "rakuten-result-item-image rakuten-result-item-price";
+  grid-template-columns: var(--image-max-size) 1fr;
+  grid-template-rows: auto auto 1fr;
+  column-gap: .5rem;
+  border-bottom: 1px solid var(--border-colour);  /* RakutenResults.css にて :last-child のみ消してある */
+  padding: .5rem .25rem;
+  cursor: pointer;
+}
+
+.rakuten-result-item:hover {
+  background: var(--item-hover-background-colour);
+}
+
+.rakuten-result-item .image {
+  grid-area: rakuten-result-item-image;
+  overflow: hidden;
+  height: var(--image-max-size);
+  text-align: center;
+}
+
+.rakuten-result-item .name {
+  grid-area: rakuten-result-item-name;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 3;
+}
+
+.rakuten-result-item .shop {
+  grid-area: rakuten-result-item-shop;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+}
+
+.rakuten-result-item .price {
+  grid-area: rakuten-result-item-price;
+}

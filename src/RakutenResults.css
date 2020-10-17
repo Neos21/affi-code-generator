@@ -1,0 +1,9 @@
+#rakuten-results .results {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#rakuten-results .results .rakuten-result-item:last-child {
+  border-bottom: 0;
+}

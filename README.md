@@ -4,8 +4,7 @@ Amazon And Rakuten Affiliate HTML Code Generator.
 
 __[Enter The Web App](https://affi-code-generator.vercel.app/)__
 
-- Develop : `$ vercel dev`
-- Ship : `$ vercel`
+- This App Is Using Amazon Product Advertising API v5.0 And Rakuten Web Service API
 - Initial Value :
 
 ```
@@ -17,6 +16,9 @@ https://affi-code-generator.vercel.app/
   &rakutenApplicationId=【Rakuten Application ID】
   &rakutenAffiliateId=【Rakuten Affiliate ID】
 ```
+
+- Develop : `$ vercel dev`
+- Ship : `$ vercel`
 
 
 ## Author

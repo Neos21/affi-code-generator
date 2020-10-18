@@ -16,6 +16,7 @@
   --general-space: 1rem;
   --input-padding-y: .3rem;
   --border-colour: #ccc;
+  --minimum-column-width: 10rem;
   --search-form-area-height: 12rem;
   --image-max-size: 128px;
   --item-hover-background-colour: #e9e9e9;
@@ -34,7 +35,7 @@ html {
   height: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden scroll;
+  overflow-y: scroll;
   overflow-wrap: break-word;
   color: #000;
   font-family: var(--font-family-sans-serif);
@@ -86,6 +87,7 @@ input[type="button"]:focus {
 textarea {
   overflow-y: scroll;
   border: none;
+  border-radius: 0;
   font-size: inherit;
   font-family: var(--font-family-monospace);
   cursor: pointer;

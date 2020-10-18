@@ -10,6 +10,10 @@
   grid-template-columns: repeat(3, 1fr);
 }
 
+#app > .results-codes-area > div {
+  min-width: var(--minimum-column-width);
+}
+
 #app > .results-codes-area > .amazon-results-area {
   grid-area: amazon-results-area;
   overflow-y: scroll;

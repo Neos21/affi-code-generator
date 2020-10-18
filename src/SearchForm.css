@@ -9,6 +9,7 @@
 #search-form > div {
   display: grid;
   grid-template-rows: auto 1fr auto;
+  min-width: var(--minimum-column-width);
   padding: .5rem var(--general-space);
   text-align: center;
 }

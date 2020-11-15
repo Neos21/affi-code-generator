@@ -27,19 +27,21 @@ export default class AmazonCode extends React.Component {
    * @param {*} state 商品情報
    */
   showCode = (state) => {
+    const url   = state.detailPageUrl.replace((/&/gu), '&amp;');
+    const title = state.title.replace((/&/gu), '&amp;').replace((/"/gu), '&quot;').replace((/</gu), '&lt;').replace((/>/gu), '&gt;')
     this.setState({
       code: `<div class="ad-amazon">
   <div class="ad-amazon-image">
-    <a href="${state.detailPageUrl}">
+    <a href="${url}">
       <img src="${state.imageUrl}" width="${state.imageWidth}" height="${state.imageHeight}">
     </a>
   </div>
   <div class="ad-amazon-info">
     <div class="ad-amazon-title">
-      <a href="${state.detailPageUrl}">${state.title}</a>
+      <a href="${url}">${title}</a>
     </div>
   </div>
-</div>\n`  // TODO : テキストの HTML エスケープをしていない
+</div>\n`
     });
   }
   

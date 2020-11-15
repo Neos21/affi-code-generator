@@ -27,23 +27,27 @@ export default class RakutenCode extends React.Component {
    * @param {*} state 商品情報
    */
   showCode = (state) => {
+    const itemUrl  = result.itemUrl.replace((/&/gu), '&amp;');
+    const shopUrl  = result.shopUrl.replace((/&/gu), '&amp;');
+    const itemName = result.itemName.replace((/&/gu), '&amp;').replace((/"/gu), '&quot;').replace((/</gu), '&lt;').replace((/>/gu), '&gt;')
+    const shopName = result.shopName.replace((/&/gu), '&amp;').replace((/"/gu), '&quot;').replace((/</gu), '&lt;').replace((/>/gu), '&gt;')
     this.setState({
       code: `<div class="ad-rakuten">
   <div class="ad-rakuten-image">
-    <a href="${state.itemUrl}">
+    <a href="${itemUrl}">
       <img src="${state.imageUrl}">
     </a>
   </div>
   <div class="ad-rakuten-info">
     <div class="ad-rakuten-title">
-      <a href="${state.itemUrl}">${state.itemName}</a>
+      <a href="${itemUrl}">${itemName}</a>
     </div>
     <div class="ad-rakuten-shop">
-      <a href="${state.shopUrl}">${state.shopName}</a>
+      <a href="${shopUrl}">${shopName}</a>
     </div>
     <div class="ad-rakuten-price">価格 : ${state.itemPrice}円</div>
   </div>
-</div>\n`  // TODO : テキストの HTML エスケープをしていない
+</div>\n`
     });
   }
   

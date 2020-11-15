@@ -27,10 +27,10 @@ export default class RakutenCode extends React.Component {
    * @param {*} state 商品情報
    */
   showCode = (state) => {
-    const itemUrl  = result.itemUrl.replace((/&/gu), '&amp;');
-    const shopUrl  = result.shopUrl.replace((/&/gu), '&amp;');
-    const itemName = result.itemName.replace((/&/gu), '&amp;').replace((/"/gu), '&quot;').replace((/</gu), '&lt;').replace((/>/gu), '&gt;')
-    const shopName = result.shopName.replace((/&/gu), '&amp;').replace((/"/gu), '&quot;').replace((/</gu), '&lt;').replace((/>/gu), '&gt;')
+    const itemUrl  = state.itemUrl.replace((/&/gu), '&amp;');
+    const shopUrl  = state.shopUrl.replace((/&/gu), '&amp;');
+    const itemName = state.itemName.replace((/&/gu), '&amp;').replace((/"/gu), '&quot;').replace((/</gu), '&lt;').replace((/>/gu), '&gt;')
+    const shopName = state.shopName.replace((/&/gu), '&amp;').replace((/"/gu), '&quot;').replace((/</gu), '&lt;').replace((/>/gu), '&gt;')
     this.setState({
       code: `<div class="ad-rakuten">
   <div class="ad-rakuten-image">

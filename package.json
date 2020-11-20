@@ -7,7 +7,7 @@
     "build": "react-scripts build",
     "serve": "npx serve -s ./build/"
   },
-  "author": "Neo <neos21@gmail.com> (http://neo.s21.xrea.com/)",
+  "author": "Neo <neos21@gmail.com> (https://neos21.net/)",
   "license": "MIT",
   "homepage": "./",
   "repository": {

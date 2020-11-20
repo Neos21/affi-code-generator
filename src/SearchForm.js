@@ -96,7 +96,7 @@ export default class SearchForm extends React.Component {
         <h1><a href="https://github.com/Neos21/affi-code-generator">Affi Code Generator</a></h1>
         <div>
           <input type="text" name="keyword" value={this.state.keyword} placeholder="キーワード" onChange={this.onChange} />
-          <div className="copyright">Made By <a href="http://neo.s21.xrea.com/">Neo</a> (<a href="https://github.com/Neos21">GitHub</a>)</div>
+          <div className="copyright">Made By <a href="https://neos21.net/">Neo</a> (<a href="https://github.com/Neos21/affi-code-generator">GitHub</a>)</div>
         </div>
         <input type="button" value="一括検索" disabled={this.isDisabledBothButton()} onClick={this.onClickSearchBoth} />
       </div>
